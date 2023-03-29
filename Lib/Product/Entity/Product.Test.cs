@@ -51,6 +51,17 @@ namespace Lib.Product.Entity
         }
 
         [Fact]
+        public void Product_WhenCreatedWithNegativeValue_ShouldBeInvalid()
+        {
+            var mockProduct = new Product("AAA", -1);
+
+            var isValid = mockProduct.IsValid();
+
+            Assert.False(isValid.isValid);
+        }
+        
+
+        [Fact]
         public void Product_WhenCreatedWithName_ShouldBeValid()
         {
             var mockProduct = new Product("Arroz", 0);
