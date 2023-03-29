@@ -31,13 +31,23 @@ namespace Lib.Product.Entity
         }
 
         [Fact]
-        public void ProductWithValue_WhenDisabled_ShoudHaveStatusEnabled()
+        public void ProductWithValue_WhenDisabled_ShouldHaveStatusEnabled()
         {
             var mockProduct = new Product("Arroz", 0);
 
             mockProduct.Disable();
 
             Assert.Equal(mockProduct.GetStatus(), Shared.Constants.Status.DISABLED);
+        }
+
+        [Fact]
+        public void Product_WhenCreatedWithoutName_ShouldBeInvalid()
+        {
+            var mockProduct = new Product("", 0);
+
+            var isValid = mockProduct.IsValid();
+
+            Assert.False(isValid.isValid);
         }
     }
 }

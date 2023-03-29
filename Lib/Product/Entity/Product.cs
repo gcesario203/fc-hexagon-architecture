@@ -1,11 +1,14 @@
 using Lib.Product.Contracts;
+using Lib.Shared.Abstractions;
+using Lib.Shared.Attributes;
 
 namespace Lib.Product.Entity
 {
-    public class Product : IProduct
+    public class Product : BaseValidator, IProduct
     {
         private string Id;
 
+        [RequiredFieldAttribute]
         private string Name;
 
         private string Status;
@@ -55,9 +58,23 @@ namespace Lib.Product.Entity
         public string GetStatus()
             => Status;
 
-        public bool IsValid()
+        public override (bool isValid, Exception? exception) IsValid()
         {
-            throw new NotImplementedException();
+            var baseValidation = base.IsValid();
+
+            if(baseValidation.isValid == false)
+                return (baseValidation);
+
+            if(string.IsNullOrEmpty(GetStatus()))
+                Status = Shared.Constants.Status.DISABLED;
+
+            if(GetStatus() != Shared.Constants.Status.DISABLED && GetStatus() != Shared.Constants.Status.ENABLED)
+                return (false, new Exception("The Status must be ENABLED or DISABLED"));
+
+            if(GetPrice() < 0)
+                return (false, new Exception("The price must be greater or equal zero"));
+
+            return (true, null);
         }
     }
 }

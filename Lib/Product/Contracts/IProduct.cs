@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lib.Shared.Abstractions;
 
 namespace Lib.Product.Contracts
 {
     public interface IProduct
     {
-        bool IsValid();
-
         void Enable();
 
         void Disable();
