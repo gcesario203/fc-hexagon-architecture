@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lib.Shared.Constants
+namespace Application.Shared.Constants
 {
     public static class Status
     {

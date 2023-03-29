@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Lib.Product.Entity
+namespace Application.Product.Entity
 {
     public class ProductUnitTest
     {

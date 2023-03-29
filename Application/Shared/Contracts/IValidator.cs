@@ -1,4 +1,4 @@
-namespace Lib.Shared.Contracts
+namespace Application.Shared.Contracts
 {
     public interface IValidator
     {

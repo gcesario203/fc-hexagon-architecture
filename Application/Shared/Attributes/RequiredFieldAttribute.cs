@@ -1,4 +1,4 @@
-namespace Lib.Shared.Attributes
+namespace Application.Shared.Attributes
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class RequiredFieldAttribute : Attribute

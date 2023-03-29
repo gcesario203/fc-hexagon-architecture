@@ -1,8 +1,8 @@
-using Lib.Product.Contracts;
-using Lib.Shared.Abstractions;
-using Lib.Shared.Attributes;
+using Application.Product.Contracts;
+using Application.Shared.Abstractions;
+using Application.Shared.Attributes;
 
-namespace Lib.Product.Entity
+namespace Application.Product.Entity
 {
     public class Product : BaseValidator, IProduct
     {

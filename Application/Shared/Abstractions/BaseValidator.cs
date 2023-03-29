@@ -1,8 +1,8 @@
-using Lib.Shared.Contracts;
-using Lib.Shared.Attributes;
+using Application.Shared.Contracts;
+using Application.Shared.Attributes;
 using System.Reflection;
 
-namespace Lib.Shared.Abstractions
+namespace Application.Shared.Abstractions
 {
     public class BaseValidator : IValidator
     {
