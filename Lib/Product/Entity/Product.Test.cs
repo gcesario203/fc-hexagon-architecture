@@ -23,7 +23,7 @@ namespace Lib.Product.Entity
         }
 
         [Fact]
-        public void ProductWithoutValue_WhenDisabled_ReturnError()
+        public void ProductWithValue_WhenDisabled_ReturnError()
         {
             var mockProduct = new Product("Arroz", 10);
 
@@ -31,7 +31,7 @@ namespace Lib.Product.Entity
         }
 
         [Fact]
-        public void ProductWithValue_WhenDisabled_ShouldHaveStatusEnabled()
+        public void ProductWithoutValue_WhenDisabled_ShouldHaveStatusDisabled()
         {
             var mockProduct = new Product("Arroz", 0);
 
@@ -48,6 +48,16 @@ namespace Lib.Product.Entity
             var isValid = mockProduct.IsValid();
 
             Assert.False(isValid.isValid);
+        }
+
+        [Fact]
+        public void Product_WhenCreatedWithName_ShouldBeValid()
+        {
+            var mockProduct = new Product("Arroz", 0);
+
+            var isValid = mockProduct.IsValid();
+
+            Assert.True(isValid.isValid);
         }
     }
 }

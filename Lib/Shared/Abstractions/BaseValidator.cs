@@ -8,26 +8,24 @@ namespace Lib.Shared.Abstractions
     {
         public IEnumerable<string> GetEmptyRequiredFields()
         {
-            var props = this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance).Where(x => x.CustomAttributes.Select(k => k.AttributeType).Contains(typeof(RequiredFieldAttribute)));
+            var props = this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                                      .Where(x => x.CustomAttributes
+                                                   .Select(k => k.AttributeType)
+                                                   .Contains(typeof(RequiredFieldAttribute)
+                                            ));
 
             if (props.Count() == 0)
-                return new List<string>();
-
-            var requiredFields = new List<string>();
+                yield break;
 
             foreach (var prop in props)
             {
-                var propTypeDefaultValue = GetDefaultValueByType(prop.GetType());
+                var propertyName = ValidateIfPropertyIsNullOrEmpty(prop);
 
-                var propValue = prop.GetValue(this);
+                if (string.IsNullOrEmpty(propertyName))
+                    yield break;
 
-                if (prop.FieldType.IsClass && (propValue == null || propTypeDefaultValue == propValue))
-                    requiredFields.Add(prop.Name);
-                else if (string.IsNullOrEmpty(propValue?.ToString()) || propTypeDefaultValue?.ToString() == propValue?.ToString())
-                    requiredFields.Add(prop.Name);
+                yield return propertyName;
             }
-
-            return requiredFields;
         }
 
         public virtual (bool isValid, Exception? exception) IsValid()
@@ -38,6 +36,21 @@ namespace Lib.Shared.Abstractions
                 return (false, new Exception($"One or more required fields are not filled: {string.Join(',', requiredFields)}"));
 
             return (true, null);
+        }
+
+        private string? ValidateIfPropertyIsNullOrEmpty(FieldInfo prop)
+        {
+            var propTypeDefaultValue = GetDefaultValueByType(prop.GetType());
+
+            var propValue = prop.GetValue(this);
+
+            if (prop.FieldType.IsClass && (propValue == null || propTypeDefaultValue == propValue))
+                return prop.Name;
+
+            if (string.IsNullOrEmpty(propValue?.ToString()) || propTypeDefaultValue?.ToString() == propValue?.ToString())
+                return prop.Name;
+
+            return null;
         }
 
         private object GetDefaultValueByType(Type type)
