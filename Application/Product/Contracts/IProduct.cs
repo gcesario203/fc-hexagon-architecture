@@ -19,5 +19,7 @@ namespace Application.Product.Contracts
         string GetStatus();
 
         decimal GetPrice();
+
+        (bool isValid, Exception? exception) IsValid();
     }
 }

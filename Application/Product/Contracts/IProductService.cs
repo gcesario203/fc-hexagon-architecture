@@ -2,7 +2,7 @@ namespace Application.Product.Contracts
 {
     public interface IProductService
     {
-        IProduct GetById(string id);
+        (IProduct, Exception) GetById(string id);
 
         (IProduct, Exception) Create(string name, decimal value);
 
