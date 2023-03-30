@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Application.Shared.Abstractions
 {
-    public class BaseValidator : IValidator
+    public abstract class BaseValidator : IValidator
     {
         public IEnumerable<string> GetEmptyRequiredFields()
         {
