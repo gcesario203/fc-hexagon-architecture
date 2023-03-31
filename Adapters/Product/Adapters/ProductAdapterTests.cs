@@ -11,7 +11,7 @@ namespace Adapters.Product.Adapters
         {
             var productRepository = new ProductEntityFrameworkAdapter();
 
-            var result = productRepository.Save(new Application.Product.Entity.ProductEntity("Arroz", 25));
+            var result = productRepository.Save(new ProductEntity("Arroz", 25));
 
             Assert.NotNull(result.Item1);
         }
@@ -21,7 +21,7 @@ namespace Adapters.Product.Adapters
         {
             var productRepository = new ProductEntityFrameworkAdapter();
 
-            Assert.Throws(typeof(Exception), () => productRepository.Save(new Application.Product.Entity.ProductEntity("", 15)));
+            Assert.Throws(typeof(Exception), () => productRepository.Save(new ProductEntity("", 15)));
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Adapters.Product.Adapters
         {
             var productRepository = new ProductEntityFrameworkAdapter();
 
-            var result = productRepository.Save(new Application.Product.Entity.ProductEntity("Arroz", 15));
+            var result = productRepository.Save(new ProductEntity("Arroz", 15));
 
             Assert.NotNull(result.Item1);
 

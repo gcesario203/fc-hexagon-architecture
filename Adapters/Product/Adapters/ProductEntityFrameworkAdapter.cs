@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Adapters.Product.Models;
 using AutoMapper;
 using Adapters.Shared.Abstractions;
+using Application.Product.Entity;
 
 namespace Adapters.Product.Adapters
 {
@@ -25,7 +26,7 @@ namespace Adapters.Product.Adapters
                 var result = _context.Set<ProductEntityFrameworkModel>().FirstOrDefault(x => x.Id == id);
 
                 if(result != null)
-                    return (_autoMapper.Map<Application.Product.Entity.ProductEntity>(result), null);
+                    return (_autoMapper.Map<ProductEntity>(result), null);
 
                 return (null, new Exception("Product not found"));
             }

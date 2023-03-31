@@ -1,4 +1,5 @@
 using Adapters.Product.Models;
+using Application.Product.Entity;
 using AutoMapper;
 
 namespace Adapters.Shared.Configuration
@@ -7,7 +8,7 @@ namespace Adapters.Shared.Configuration
     {
         public MappingProfile()
         {
-            CreateMap<Application.Product.Entity.ProductEntity, ProductEntityFrameworkModel>().ReverseMap();   
+            CreateMap<ProductEntity, ProductEntityFrameworkModel>().ReverseMap();   
         }
     }
 }
