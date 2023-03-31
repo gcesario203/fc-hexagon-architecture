@@ -9,6 +9,6 @@ namespace Adapters.Product.Models
 
         public string Status { get; set; }
 
-        public string Price { get; set; }
+        public decimal Price { get; set; }
     }
 }
