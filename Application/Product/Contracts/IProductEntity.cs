@@ -6,7 +6,7 @@ using Application.Shared.Abstractions;
 
 namespace Application.Product.Contracts
 {
-    public interface IProduct
+    public interface IProductEntity
     {
         void Enable();
 

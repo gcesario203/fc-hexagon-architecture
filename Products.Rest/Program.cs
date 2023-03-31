@@ -14,7 +14,7 @@ builder.Services.AddDbContext<InMemoryDbContext>(config =>{
     config.UseInMemoryDatabase(databaseName: "ProductDb");
 });
 
-builder.Services.AddTransient<IProductPersistence, ProductAdapter>();
+builder.Services.AddTransient<IProductPersistence, ProductEntityFrameworkAdapter>();
 
 builder.Services.AddTransient<IProductService, ProductService>();
 

@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Adapters.Shared.Abstractions
 {
-    public abstract class BaseAdapter
+    public abstract class BaseEntityFrameworkAdapter
     {
         protected readonly DbContext _context;
 
         protected readonly IMapper _autoMapper;
 
-        public BaseAdapter()
+        public BaseEntityFrameworkAdapter()
         {
             _context = new InMemoryDbContext();
             var configs = new MapperConfiguration(config => config.AddProfile<MappingProfile>());
@@ -19,7 +19,7 @@ namespace Adapters.Shared.Abstractions
             _autoMapper = new Mapper(configs);
         }
 
-        public BaseAdapter(DbContext dbContext, IMapper mapper)
+        public BaseEntityFrameworkAdapter(DbContext dbContext, IMapper mapper)
         {
             _context = dbContext;
             _autoMapper = mapper;

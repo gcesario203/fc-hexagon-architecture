@@ -6,26 +6,26 @@ using Adapters.Shared.Abstractions;
 
 namespace Adapters.Product.Adapters
 {
-    public class ProductAdapter : BaseAdapter, IProductPersistence
+    public class ProductEntityFrameworkAdapter : BaseEntityFrameworkAdapter, IProductPersistence
     {
 
-        public ProductAdapter() : base()
+        public ProductEntityFrameworkAdapter() : base()
         {
         }
 
-        public ProductAdapter(DbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public ProductEntityFrameworkAdapter(DbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
 
         }
 
-        public (IProduct, Exception) Get(string id)
+        public (IProductEntity, Exception) Get(string id)
         {
             try
             {
                 var result = _context.Set<ProductEntityFrameworkModel>().FirstOrDefault(x => x.Id == id);
 
                 if(result != null)
-                    return (_autoMapper.Map<Application.Product.Entity.Product>(result), null);
+                    return (_autoMapper.Map<Application.Product.Entity.ProductEntity>(result), null);
 
                 return (null, new Exception("Product not found"));
             }
@@ -35,7 +35,7 @@ namespace Adapters.Product.Adapters
             }
         }
 
-        public (IProduct, Exception) Save(IProduct product)
+        public (IProductEntity, Exception) Save(IProductEntity product)
         {
             try
             {

@@ -4,7 +4,7 @@ using Application.Shared.Attributes;
 
 namespace Application.Product.Entity
 {
-    public class Product : BaseValidator, IProduct
+    public class ProductEntity : BaseValidator, IProductEntity
     {
         private string Id;
 
@@ -15,7 +15,7 @@ namespace Application.Product.Entity
 
         private decimal Price;
 
-        public Product(string name, decimal price, string id = null)
+        public ProductEntity(string name, decimal price, string id = null)
         {
             Name = name;
             Price = price;

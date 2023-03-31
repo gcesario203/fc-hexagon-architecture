@@ -9,7 +9,7 @@ namespace Application.Product.Services
         [Fact]
         public void ProductService_WhenGettingExistingProductById_ShouldReturnTheProduct()
         {
-            var mockProduct = new Product.Entity.Product("Alberto", 15);
+            var mockProduct = new Product.Entity.ProductEntity("Alberto", 15);
 
             var id = mockProduct.GetId();
             var productServiceStub = new Moq.Mock<IProductPersistence>();
@@ -41,11 +41,11 @@ namespace Application.Product.Services
         [Fact]
         public void ProductService_WhenCreatingAValidProduct_ShouldReturnTheCreatedProduct()
         {
-            var mockProduct = new Product.Entity.Product("Alberto", 15);
+            var mockProduct = new Product.Entity.ProductEntity("Alberto", 15);
 
             var productServiceStub = new Moq.Mock<IProductPersistence>();
 
-            productServiceStub.Setup(x => x.Save(It.IsAny<IProduct>())).Returns((mockProduct, null));
+            productServiceStub.Setup(x => x.Save(It.IsAny<IProductEntity>())).Returns((mockProduct, null));
 
             var productService = new ProductService(productServiceStub.Object);
 
@@ -62,7 +62,7 @@ namespace Application.Product.Services
 
             var productServiceStub = new Moq.Mock<IProductPersistence>();
 
-            productServiceStub.Setup(x => x.Save(It.IsAny<IProduct>())).Returns((null, It.IsAny<Exception>()));
+            productServiceStub.Setup(x => x.Save(It.IsAny<IProductEntity>())).Returns((null, It.IsAny<Exception>()));
 
             var productService = new ProductService(productServiceStub.Object);
 
@@ -74,11 +74,11 @@ namespace Application.Product.Services
         {
             var productServiceStub = new Moq.Mock<IProductPersistence>();
 
-            productServiceStub.Setup(x => x.Save(It.IsAny<IProduct>())).Returns((null, It.IsAny<Exception>()));
+            productServiceStub.Setup(x => x.Save(It.IsAny<IProductEntity>())).Returns((null, It.IsAny<Exception>()));
 
             var productService = new ProductService(productServiceStub.Object);
 
-            var result = productService.Enable(new Product.Entity.Product("Augusto", 0));
+            var result = productService.Enable(new Product.Entity.ProductEntity("Augusto", 0));
 
             Assert.Null(result.Item1);
 
@@ -88,10 +88,10 @@ namespace Application.Product.Services
         [Fact]
         public void ProductService_WhenEnablingAProductWithValue_ShouldBeActivated()
         {
-            var mock = new Product.Entity.Product("Augusto", 20);
+            var mock = new Product.Entity.ProductEntity("Augusto", 20);
             var productServiceStub = new Moq.Mock<IProductPersistence>();
 
-            productServiceStub.Setup(x => x.Save(It.IsAny<IProduct>())).Returns((mock, null));
+            productServiceStub.Setup(x => x.Save(It.IsAny<IProductEntity>())).Returns((mock, null));
 
             var productService = new ProductService(productServiceStub.Object);
 
@@ -103,10 +103,10 @@ namespace Application.Product.Services
         [Fact]
         public void ProductService_WhenDisablingAProductWithValue_ShouldReturnAException()
         {
-            var mock = new Product.Entity.Product("Augusto", 20);
+            var mock = new Product.Entity.ProductEntity("Augusto", 20);
             var productServiceStub = new Moq.Mock<IProductPersistence>();
 
-            productServiceStub.Setup(x => x.Save(It.IsAny<IProduct>())).Returns((null, It.IsAny<Exception>()));
+            productServiceStub.Setup(x => x.Save(It.IsAny<IProductEntity>())).Returns((null, It.IsAny<Exception>()));
 
             var productService = new ProductService(productServiceStub.Object);
 
@@ -118,10 +118,10 @@ namespace Application.Product.Services
         [Fact]
         public void ProductService_WhenDisablingAProductWithValue_ShouldBeDeactivated()
         {
-            var mock = new Product.Entity.Product("Augusto", 0);
+            var mock = new Product.Entity.ProductEntity("Augusto", 0);
             var productServiceStub = new Moq.Mock<IProductPersistence>();
 
-            productServiceStub.Setup(x => x.Save(It.IsAny<IProduct>())).Returns((mock, null));
+            productServiceStub.Setup(x => x.Save(It.IsAny<IProductEntity>())).Returns((mock, null));
 
             var productService = new ProductService(productServiceStub.Object);
 

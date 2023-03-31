@@ -7,7 +7,7 @@ namespace Adapters.Shared.Configuration
     {
         public MappingProfile()
         {
-            CreateMap<Application.Product.Entity.Product, ProductEntityFrameworkModel>().ReverseMap();   
+            CreateMap<Application.Product.Entity.ProductEntity, ProductEntityFrameworkModel>().ReverseMap();   
         }
     }
 }

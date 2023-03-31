@@ -2,12 +2,12 @@ namespace Application.Product.Contracts
 {
     public interface IProductService
     {
-        (IProduct, Exception) GetById(string id);
+        (IProductEntity, Exception) GetById(string id);
 
-        (IProduct, Exception) Create(string name, decimal value);
+        (IProductEntity, Exception) Create(string name, decimal value);
 
-        (IProduct, Exception) Enable(IProduct product);
+        (IProductEntity, Exception) Enable(IProductEntity product);
 
-        (IProduct, Exception) Disable(IProduct product);
+        (IProductEntity, Exception) Disable(IProductEntity product);
     }
 }

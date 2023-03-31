@@ -15,7 +15,7 @@ namespace Application.Product.Services
             _persistence = persistence;
         }
 
-        public (IProduct, Exception) GetById(string id)
+        public (IProductEntity, Exception) GetById(string id)
         {
             var result = _persistence.Get(id);
 
@@ -25,9 +25,9 @@ namespace Application.Product.Services
             return (result.Item1, null);
         }
 
-        public (IProduct, Exception) Create(string name, decimal value)
+        public (IProductEntity, Exception) Create(string name, decimal value)
         {
-            var newProduct = new Product.Entity.Product(name, value);
+            var newProduct = new Product.Entity.ProductEntity(name, value);
 
             var isValid = newProduct.IsValid();
 
@@ -37,7 +37,7 @@ namespace Application.Product.Services
             return (null, isValid.exception);
         }
 
-        public (IProduct, Exception) Enable(IProduct product)
+        public (IProductEntity, Exception) Enable(IProductEntity product)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Application.Product.Services
             }
         }
 
-        public (IProduct, Exception) Disable(IProduct product)
+        public (IProductEntity, Exception) Disable(IProductEntity product)
         {
             try
             {
