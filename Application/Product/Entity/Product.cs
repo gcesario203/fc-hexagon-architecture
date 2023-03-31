@@ -15,14 +15,19 @@ namespace Application.Product.Entity
 
         private decimal Price;
 
-        public Product(string name, decimal price)
+        public Product(string name, decimal price, string id = null)
         {
             Name = name;
             Price = price;
 
-            Id = Guid.NewGuid().ToString();
+            Id = string.IsNullOrEmpty(id) ? Guid.NewGuid().ToString() : id;
 
             Status = Shared.Constants.Status.DISABLED;
+
+            var validateResult = IsValid();
+
+            if(!validateResult.isValid && validateResult.exception != null)
+                throw validateResult.exception;
         }
 
         public void Disable(){
@@ -64,6 +69,9 @@ namespace Application.Product.Entity
 
             if(baseValidation.isValid == false)
                 return (baseValidation);
+
+            if(!Guid.TryParse(this.Id, out var result))
+                return (false, new Exception("Invalid GUID!"));
 
             if(string.IsNullOrEmpty(GetStatus()))
                 Status = Shared.Constants.Status.DISABLED;

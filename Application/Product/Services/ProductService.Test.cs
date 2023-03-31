@@ -66,11 +66,7 @@ namespace Application.Product.Services
 
             var productService = new ProductService(productServiceStub.Object);
 
-            var result = productService.Create("Alberto", -1);
-
-            Assert.Null(result.Item1);
-
-            Assert.NotNull(result.Item2);
+            Assert.Throws(typeof(Exception), () => productService.Create("Alberto", -1));
         }
 
         [Fact]

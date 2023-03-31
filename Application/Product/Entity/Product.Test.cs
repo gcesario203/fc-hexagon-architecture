@@ -42,24 +42,12 @@ namespace Application.Product.Entity
 
         [Fact]
         public void Product_WhenCreatedWithoutName_ShouldBeInvalid()
-        {
-            var mockProduct = new Product("", 0);
-
-            var isValid = mockProduct.IsValid();
-
-            Assert.False(isValid.isValid);
-        }
+        => Assert.Throws(typeof(Exception), () => new Product("", 0));
 
         [Fact]
         public void Product_WhenCreatedWithNegativeValue_ShouldBeInvalid()
-        {
-            var mockProduct = new Product("AAA", -1);
+            => Assert.Throws(typeof(Exception), () => new Product("AAA", -1));
 
-            var isValid = mockProduct.IsValid();
-
-            Assert.False(isValid.isValid);
-        }
-        
 
         [Fact]
         public void Product_WhenCreatedWithName_ShouldBeValid()
